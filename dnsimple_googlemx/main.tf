@@ -17,7 +17,7 @@ variable "mx_server_domains" {
 resource "dnsimple_record" "root_googlemx" {
   count = "${length(var.mx_server_domains)}"
   domain = "${var.dnsimple_domain}"
-  name = "@"
+  name = ""
   value = "${var.mx_server_domains[count.index]}"
   priority = "${count.index*10 + 10}"
   type = "MX"
