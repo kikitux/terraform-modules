@@ -5,14 +5,15 @@ variable ttl {}
 
 variable "gh_ip" {
   type = "list"
+
   default = [
     "192.30.252.153",
-    "192.30.252.154"
+    "192.30.252.154",
   ]
 }
 
 resource "dnsimple_record" "root_gh" {
-  count = "${length(var.gh_ip)}"
+  count  = "${length(var.gh_ip)}"
   domain = "${var.dnsimple_domain}"
   name   = ""
   value  = "${var.gh_ip[count.index]}"

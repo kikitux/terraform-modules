@@ -5,6 +5,7 @@ variable ttl {}
 
 variable "mx_server_domains" {
   type = "list"
+
   default = [
     "aspmx.l.google.com",
     "alt1.aspmx.l.google.com",
@@ -15,12 +16,11 @@ variable "mx_server_domains" {
 }
 
 resource "dnsimple_record" "root_googlemx" {
-  count = "${length(var.mx_server_domains)}"
-  domain = "${var.dnsimple_domain}"
-  name = ""
-  value = "${var.mx_server_domains[count.index]}"
+  count    = "${length(var.mx_server_domains)}"
+  domain   = "${var.dnsimple_domain}"
+  name     = ""
+  value    = "${var.mx_server_domains[count.index]}"
   priority = "${count.index*10 + 10}"
-  type = "MX"
-  ttl = "${var.ttl}"
+  type     = "MX"
+  ttl      = "${var.ttl}"
 }
-
